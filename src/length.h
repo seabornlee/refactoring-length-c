@@ -12,7 +12,7 @@ typedef struct {
 
 typedef Length *LengthPtr;
 
-LengthPtr newLength(double val, enum Unit unit);
+LengthPtr newLength(double value, enum Unit unit);
 LengthPtr as(LengthPtr obj, enum Unit targetUnit);
 
 #endif //REFACTOR_LENGTH_C_LENGTH_H
