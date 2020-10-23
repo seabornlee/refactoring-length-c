@@ -1,37 +1,37 @@
 #include "length.h"
 #include <string.h>
 
-Length *newLength(double val, const char *uinnt) {
+Length *newLength(double value, const char *unit) {
     LengthPtr length = (LengthPtr) malloc(sizeof(Length));
 
-    length->val = val;
-    length->uinnt = uinnt;
+    length->value = value;
+    length->unit = unit;
     return length;
 }
 
-LengthPtr as(LengthPtr obj, const char *u) {
-    LengthPtr len = obj;
-    if (strcmp(obj->uinnt, "f") == 0 && strcmp(u, "inch") == 0) {
-        len = newLength(obj->val * 12, u);
+LengthPtr as(LengthPtr obj, const char *unit) {
+    LengthPtr length = obj;
+    if (strcmp(obj->unit, "f") == 0 && strcmp(unit, "inch") == 0) {
+        length = newLength(obj->value * 12, unit);
     }
 
-    if (strcmp(obj->uinnt, "inch") == 0 && strcmp(u, "f") == 0) {
-        len = newLength(obj->val / 12, u);
+    if (strcmp(obj->unit, "inch") == 0 && strcmp(unit, "f") == 0) {
+        length = newLength(obj->value / 12, unit);
     }
 
-    if (strcmp(obj->uinnt, "yard") == 0) {
-        if (strcmp(u, "inch") == 0) {
-            len = newLength(obj->val * 36, u);
-        } else if (strcmp(u, "f") == 0) {
-            len = newLength(obj->val * 3, u);
+    if (strcmp(obj->unit, "yard") == 0) {
+        if (strcmp(unit, "inch") == 0) {
+            length = newLength(obj->value * 36, unit);
+        } else if (strcmp(unit, "f") == 0) {
+            length = newLength(obj->value * 3, unit);
         }
-    } else if (strcmp(u, "yard") == 0) {
-        if (strcmp(obj->uinnt, "f") == 0) {
-            len = newLength(obj->val / 3, u);
-        } else if (strcmp(obj->uinnt, "inch") == 0) {
-            len = newLength(obj->val / 36, u);
+    } else if (strcmp(unit, "yard") == 0) {
+        if (strcmp(obj->unit, "f") == 0) {
+            length = newLength(obj->value / 3, unit);
+        } else if (strcmp(obj->unit, "inch") == 0) {
+            length = newLength(obj->value / 36, unit);
         }
     }
-    return len;
+    return length;
 }
 
