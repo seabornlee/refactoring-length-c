@@ -11,24 +11,24 @@ Length *newLength(double value, const char *unit) {
 
 LengthPtr as(LengthPtr obj, const char *unit) {
     LengthPtr length = obj;
-    if (strcmp(obj->unit, "f") == 0 && strcmp(unit, "inch") == 0) {
+    if (strcmp(obj->unit, FOOT) == 0 && strcmp(unit, INCH) == 0) {
         length = newLength(obj->value * 12, unit);
     }
 
-    if (strcmp(obj->unit, "inch") == 0 && strcmp(unit, "f") == 0) {
+    if (strcmp(obj->unit, INCH) == 0 && strcmp(unit, FOOT) == 0) {
         length = newLength(obj->value / 12, unit);
     }
 
-    if (strcmp(obj->unit, "yard") == 0) {
-        if (strcmp(unit, "inch") == 0) {
+    if (strcmp(obj->unit, YARD) == 0) {
+        if (strcmp(unit, INCH) == 0) {
             length = newLength(obj->value * 36, unit);
-        } else if (strcmp(unit, "f") == 0) {
+        } else if (strcmp(unit, FOOT) == 0) {
             length = newLength(obj->value * 3, unit);
         }
-    } else if (strcmp(unit, "yard") == 0) {
-        if (strcmp(obj->unit, "f") == 0) {
+    } else if (strcmp(unit, YARD) == 0) {
+        if (strcmp(obj->unit, FOOT) == 0) {
             length = newLength(obj->value / 3, unit);
-        } else if (strcmp(obj->unit, "inch") == 0) {
+        } else if (strcmp(obj->unit, INCH) == 0) {
             length = newLength(obj->value / 36, unit);
         }
     }

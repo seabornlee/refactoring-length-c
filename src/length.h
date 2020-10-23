@@ -1,6 +1,10 @@
 #ifndef REFACTOR_LENGTH_C_LENGTH_H
 #define REFACTOR_LENGTH_C_LENGTH_H
 
+static const char *FOOT = "foot";
+static char *const INCH = "inch";
+static char *const YARD = "yard";
+
 typedef struct {
     double value;
     const char *unit;
