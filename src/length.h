@@ -1,19 +1,19 @@
 #ifndef REFACTOR_LENGTH_C_LENGTH_H
 #define REFACTOR_LENGTH_C_LENGTH_H
 
-static const char *FOOT = "foot";
-static char *const INCH = "inch";
-static char *const YARD = "yard";
+enum Unit {
+    Foot, Inch, Yard
+};
 
 typedef struct {
     double value;
-    const char *unit;
+    enum Unit temp_unit;
 } Length;
 
 typedef Length *LengthPtr;
 
-LengthPtr newLength(double val, const char *unit);
-LengthPtr as(LengthPtr obj, const char *unit);
+LengthPtr newLength(double val, enum Unit unit);
+LengthPtr as(LengthPtr obj, enum Unit targetUnit);
 
 #endif //REFACTOR_LENGTH_C_LENGTH_H
 

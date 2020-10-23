@@ -1,35 +1,36 @@
 #include "length.h"
 #include <string.h>
 
-Length *newLength(double value, const char *unit) {
+
+LengthPtr newLength(double val, enum Unit unit) {
     LengthPtr length = (LengthPtr) malloc(sizeof(Length));
 
-    length->value = value;
-    length->unit = unit;
+    length->value = val;
+    length->temp_unit = unit;
     return length;
 }
 
-LengthPtr as(LengthPtr obj, const char *unit) {
+LengthPtr as(LengthPtr obj, enum Unit targetUnit) {
     LengthPtr length = obj;
-    if (strcmp(obj->unit, FOOT) == 0 && strcmp(unit, INCH) == 0) {
-        length = newLength(obj->value * 12, unit);
+    if (obj->temp_unit == Foot && targetUnit == Inch) {
+        length = newLength(obj->value * 12, targetUnit);
     }
 
-    if (strcmp(obj->unit, INCH) == 0 && strcmp(unit, FOOT) == 0) {
-        length = newLength(obj->value / 12, unit);
+    if (obj->temp_unit == Inch && targetUnit == Foot) {
+        length = newLength(obj->value / 12, targetUnit);
     }
 
-    if (strcmp(obj->unit, YARD) == 0) {
-        if (strcmp(unit, INCH) == 0) {
-            length = newLength(obj->value * 36, unit);
-        } else if (strcmp(unit, FOOT) == 0) {
-            length = newLength(obj->value * 3, unit);
+    if (obj->temp_unit == Yard) {
+        if (targetUnit == Inch) {
+            length = newLength(obj->value * 36, targetUnit);
+        } else if (targetUnit == Foot) {
+            length = newLength(obj->value * 3, targetUnit);
         }
-    } else if (strcmp(unit, YARD) == 0) {
-        if (strcmp(obj->unit, FOOT) == 0) {
-            length = newLength(obj->value / 3, unit);
-        } else if (strcmp(obj->unit, INCH) == 0) {
-            length = newLength(obj->value / 36, unit);
+    } else if (targetUnit == Yard) {
+        if (obj->temp_unit == Foot) {
+            length = newLength(obj->value / 3, targetUnit);
+        } else if (obj->temp_unit == Inch) {
+            length = newLength(obj->value / 36, targetUnit);
         }
     }
     return length;
