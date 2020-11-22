@@ -1,8 +1,6 @@
 #include <gtest/gtest.h>
 
-extern "C"{
-    #include "length.h"
-}
+#include "length.h"
 
 TEST(LengthTest, should_1_inch_equals_1_inch) {
     LengthPtr length = newLength(1, "inch");
